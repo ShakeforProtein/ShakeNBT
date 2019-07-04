@@ -1,0 +1,6 @@
+apiLink: 'https://api.github.com/repos/TreeboMC/ShakeNBT/releases/latest'
+releasePage: 'https://github.com/TreeboMC/ShakeNBT/releases/latest'
+
+messages:
+  badge: '&6[ShakeNBT]&r'
+  error: '&4ERROR:&r'

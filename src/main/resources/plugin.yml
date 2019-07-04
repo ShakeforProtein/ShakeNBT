@@ -1,0 +1,46 @@
+name: ShakeNBT
+version: ${project.version}
+main: me.shakeforprotein.shakenbt.ShakeNBT
+api-version: 1.14
+authors: [ShakeforProtein]
+description: Tool to read and set nbt tags
+website: http://treebo.games
+
+
+permissions:
+  shakenbt.updatechecker:
+    default: op
+  shakenbt.show:
+    default: op
+  shakenbt.set:
+    default: op
+  shakenbt.vipplus.nameit:
+    default: op
+  shakenbt.vipplus.loreit:
+    default: op
+
+commands:
+  nbtshow:
+    permission: shakenbt.show
+    usage: <command>
+    description: Lists all nbt tags an item is using on MAIN HAND ITEM.
+  nbtadd:
+    permission: shakenbt.set
+    usage: <command> <keyname> <keyvalue>
+    description: adds (or replaces) nbt tag with name <keyname> and value <keyvalue> on MAIN HAND ITEM. Keyname must be one word, you may use _. Everything after keyname will be treated as the value.
+  nbtremove:
+    permission: shakenbt.set
+    usage: <command> <keyname>
+    description: Removes nbt tag with name <keyname> on MAIN HAND ITEM
+  nbtset:
+    permission: shakenbt.set
+    usage: <command> <keyname> <keyvalue>
+    description: Removes ALL NBT DATA and REPLACES with your <keyname> <keyvalue> pair, on MAIN HAND ITEM.
+  nbtclear:
+    permission: shakenbt.set
+    usage: <command> <keyname> <keyvalue>
+    description: Removes ALL NBT DATA on MAIN HAND ITEM.
+  nameit:
+    permission: shakenbt.vipplus.nameit
+  loreit:
+    permission: shakenbt.vipplus.loreit
