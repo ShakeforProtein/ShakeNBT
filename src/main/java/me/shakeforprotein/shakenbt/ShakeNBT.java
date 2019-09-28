@@ -1,7 +1,9 @@
 package me.shakeforprotein.shakenbt;
 
 import me.shakeforprotein.shakenbt.Commands.*;
+import me.shakeforprotein.shakenbt.Listeners.onBlockBreak;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
@@ -23,7 +25,8 @@ public final class ShakeNBT extends JavaPlugin {
         this.getCommand("nbtshow").setExecutor(new ShowNBT(this));
         this.getCommand("nameit").setExecutor(new NameIt(this));
         this.getCommand("loreit").setExecutor(new LoreIt(this));
-        uc.getCheckDownloadURL();
+        //uc.getCheckDownloadURL();
+        Bukkit.getPluginManager().registerEvents(new onBlockBreak(this), this);
     }
 
     @Override
