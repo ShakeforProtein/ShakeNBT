@@ -1,7 +1,7 @@
 package me.shakeforprotein.shakenbt.Commands;
 
 import me.shakeforprotein.shakenbt.ShakeNBT;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
+import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -26,7 +26,7 @@ public class ShowNBT  implements CommandExecutor {
             Player p = (Player) sender;
             if(p.getInventory().getItemInMainHand() != null && p.getInventory().getItemInMainHand().getType() != Material.AIR) {
                 ItemStack bukkitItem = p.getInventory().getItemInMainHand();
-                net.minecraft.server.v1_14_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
+                net.minecraft.server.v1_15_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
                 NBTTagCompound compound = pl.getCompound(nmsItem);
                 Set<String> compoundKeys = compound.getKeys();
                 p.sendMessage("Retrieving nbt");

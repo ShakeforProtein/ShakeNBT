@@ -1,16 +1,18 @@
 package me.shakeforprotein.shakenbt.Listeners;
 
 import me.shakeforprotein.shakenbt.ShakeNBT;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import org.bukkit.ChatColor;
+import net.minecraft.server.v1_15_R1.MinecraftServer;
+import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
 
 import java.util.*;
 
@@ -28,7 +30,7 @@ public class onBlockBreak implements Listener {
         if (mHI.getType() != Material.AIR && (mHI.getType().name().toUpperCase().contains("_PICKAXE") || mHI.getType().name().toUpperCase().contains("_AXE"))) {
 
             ItemStack bukkitItem = p.getInventory().getItemInMainHand();
-            net.minecraft.server.v1_14_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
+            net.minecraft.server.v1_15_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
             NBTTagCompound compound = pl.getCompound(nmsItem);
             Set<String> compoundKeys = compound.getKeys();
             if (compoundKeys.contains("ShakeEnchant")) {
@@ -78,34 +80,32 @@ public class onBlockBreak implements Listener {
                             } else if (drop.getType().name().toUpperCase().contains("CLAY_BALL")) {
                                 newDrops.add(new ItemStack(Material.BRICK, drop.getAmount()));
                             }
-                        }
-                        else {
+                        } else {
                             newDrops.add(drop);
                         }
                     }
                     if (!newDrops.isEmpty()) {
                         drops.clear();
                         drops.addAll(newDrops);
-                        for(ItemStack drop: drops){
-                            e.getBlock().getWorld().dropItem(e.getBlock().getLocation() ,drop);
+                        for (ItemStack drop : drops) {
+                            e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), drop);
                         }
                         e.getBlock().setType(Material.AIR);
                     }
-                }
-                else if (ench.equalsIgnoreCase("+Size")){
+                } else if (ench.equalsIgnoreCase("+Size")) {
                     Location loc = e.getBlock().getLocation();
                     HashMap<Integer, Location> locationHashmap = new HashMap<>();
-                    int i,j,k,l = 0;
-                    for(i=0;i<3;i++){
-                        for(j=0;j<3;j++){
-                            for(k=0;k<3;k++){
-                               locationHashmap.put(l, loc.add(i-1,j-1,k-1));
-                               l++;
+                    int i, j, k, l = 0;
+                    for (i = 0; i < 3; i++) {
+                        for (j = 0; j < 3; j++) {
+                            for (k = 0; k < 3; k++) {
+                                locationHashmap.put(l, loc.add(i - 1, j - 1, k - 1));
+                                l++;
                             }
                         }
                     }
-                    for(i=0; i<l+1; i++){
-                        if(locationHashmap.get(i).getBlock().getType().equals(loc.getBlock().getType())) {
+                    for (i = 0; i < l + 1; i++) {
+                        if (locationHashmap.get(i).getBlock().getType().equals(loc.getBlock().getType())) {
                             locationHashmap.get(i).getBlock().breakNaturally(mHI);
                         }
                     }
@@ -113,4 +113,29 @@ public class onBlockBreak implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void witherBreakBlocks(EntityExplodeEvent e) {
+        double[] tps = MinecraftServer.getServer().recentTps;
+        if (tps[0] < 18) {
+            if (e.getEntity().getType().name().toUpperCase().contains("WITHER")) {
+                e.setCancelled(true);
+                for (Block b : e.blockList()) {
+                    b.setType(Material.AIR);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void witherBreakBlocks2(EntityChangeBlockEvent e) {
+        double[] tps = MinecraftServer.getServer().recentTps;
+        if (tps[0] < 18) {
+            if (e.getEntity().getType().name().toUpperCase().contains("WITHER")) {
+                e.setCancelled(true);
+                e.getBlock().setType(Material.AIR);
+            }
+        }
+    }
+
 }

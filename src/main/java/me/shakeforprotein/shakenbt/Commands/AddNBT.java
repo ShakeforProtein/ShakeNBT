@@ -1,16 +1,23 @@
 package me.shakeforprotein.shakenbt.Commands;
 
 import me.shakeforprotein.shakenbt.ShakeNBT;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagString;
+import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import net.minecraft.server.v1_15_R1.NBTTagString;
+import net.minecraft.server.v1_15_R1.NBTTagType;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_15_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
+import java.lang.reflect.Field;
 import java.util.Set;
 
 public class AddNBT implements CommandExecutor {
@@ -27,7 +34,8 @@ public class AddNBT implements CommandExecutor {
             Player p = (Player) sender;
             if(p.getInventory().getItemInMainHand() != null && p.getInventory().getItemInMainHand().getType() != Material.AIR) {
                 ItemStack bukkitItem = p.getInventory().getItemInMainHand();
-                net.minecraft.server.v1_14_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
+
+                net.minecraft.server.v1_15_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
                 NBTTagCompound compound = pl.getCompound(nmsItem);
                 Set<String> compoundKeys = compound.getKeys();
                 StringBuilder sb = new StringBuilder();
@@ -35,11 +43,23 @@ public class AddNBT implements CommandExecutor {
                 for(i=1; i<args.length; i++){
                     sb.append(args[i]);
                 }
-                String newNBTItem = sb.toString();
-                compound.set(args[0], new NBTTagString(newNBTItem));
+
+                compound.setString(args[0], sb.toString());
+//                String newNBTItem = sb.toString();
+//                compound.set(args[0], new NBTTagType<String>(newNBTItem));
                 nmsItem.setTag(compound);
                 ItemStack newItem = CraftItemStack.asBukkitCopy(nmsItem);
                 p.getInventory().setItemInMainHand(newItem);
+
+                /*
+                ItemMeta iMeta = bukkitItem.getItemMeta();
+                PersistentDataContainer pDC = iMeta.getPersistentDataContainer();
+                NamespacedKey namespacedKey = new NamespacedKey(pl, args[0]);
+                pDC.set(namespacedKey, PersistentDataType.STRING ,sb.toString());
+                bukkitItem.setItemMeta(iMeta);
+                */
+                sender.sendMessage(pl.badge + "Item Updated");
+
             }
             else {p.sendMessage("You must have an item in your main hand");}
         }
