@@ -1,7 +1,7 @@
 name: ShakeNBT
 version: ${project.version}
 main: me.shakeforprotein.shakenbt.ShakeNBT
-api-version: 1.14
+api-version: 1.15
 authors: [ShakeforProtein]
 description: Tool to read and set nbt tags
 website: http://treebo.games
