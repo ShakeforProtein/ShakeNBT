@@ -6,3 +6,5 @@ messages:
   error: '&4ERROR:&r'
 
 disableBlockExplosionsLowTPS: true
+
+bstatsIntegration: true

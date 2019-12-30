@@ -3,6 +3,7 @@ package me.shakeforprotein.shakenbt;
 import me.shakeforprotein.shakenbt.Commands.*;
 import me.shakeforprotein.shakenbt.Listeners.onBlockBreak;
 import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
@@ -27,6 +28,12 @@ public final class ShakeNBT extends JavaPlugin {
         this.getCommand("loreit").setExecutor(new LoreIt(this));
         //uc.getCheckDownloadURL();
         Bukkit.getPluginManager().registerEvents(new onBlockBreak(this), this);
+
+        if(getConfig().get("bstatsIntegration") != null) {
+            if (getConfig().getBoolean("bstatsIntegration")) {
+                Metrics metrics = new Metrics(this);
+            }
+        }
     }
 
     @Override
