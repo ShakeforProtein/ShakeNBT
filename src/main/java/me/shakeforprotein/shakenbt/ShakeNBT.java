@@ -2,6 +2,7 @@ package me.shakeforprotein.shakenbt;
 
 import me.shakeforprotein.shakenbt.Commands.*;
 import me.shakeforprotein.shakenbt.Listeners.onBlockBreak;
+import me.shakeforprotein.shakenbt.Listeners.onHoe;
 import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public final class ShakeNBT extends JavaPlugin {
         this.getCommand("loreit").setExecutor(new LoreIt(this));
         //uc.getCheckDownloadURL();
         Bukkit.getPluginManager().registerEvents(new onBlockBreak(this), this);
+        Bukkit.getPluginManager().registerEvents(new onHoe(), this);
 
         if(getConfig().get("bstatsIntegration") != null) {
             if (getConfig().getBoolean("bstatsIntegration")) {
