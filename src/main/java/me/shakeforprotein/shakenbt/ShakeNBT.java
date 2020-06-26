@@ -3,11 +3,11 @@ package me.shakeforprotein.shakenbt;
 import me.shakeforprotein.shakenbt.Commands.*;
 import me.shakeforprotein.shakenbt.Listeners.onBlockBreak;
 import me.shakeforprotein.shakenbt.Listeners.onHoe;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -44,17 +44,17 @@ public final class ShakeNBT extends JavaPlugin {
     }
 
 
-    public net.minecraft.server.v1_15_R1.ItemStack  getNMSItem(ItemStack item){
-        net.minecraft.server.v1_15_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+    public net.minecraft.server.v1_16_R1.ItemStack  getNMSItem(ItemStack item){
+        net.minecraft.server.v1_16_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
         return nmsItem;
     }
 
-    public NBTTagCompound getCompound(net.minecraft.server.v1_15_R1.ItemStack nmsItem){
+    public NBTTagCompound getCompound(net.minecraft.server.v1_16_R1.ItemStack nmsItem){
         NBTTagCompound nmsCompound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
         return nmsCompound;
     }
 
-    public ItemStack getBukkitItem(net.minecraft.server.v1_15_R1.ItemStack nmsItem){
+    public ItemStack getBukkitItem(net.minecraft.server.v1_16_R1.ItemStack nmsItem){
         ItemStack bukkitItem = CraftItemStack.asBukkitCopy(nmsItem);
         return bukkitItem;
     }

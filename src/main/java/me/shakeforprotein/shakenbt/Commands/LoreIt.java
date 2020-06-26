@@ -1,7 +1,7 @@
 package me.shakeforprotein.shakenbt.Commands;
 
 import me.shakeforprotein.shakenbt.ShakeNBT;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -53,7 +53,7 @@ public class LoreIt implements CommandExecutor {
                             StringBuilder sb = new StringBuilder();
                             int i = 0;
                             for (i = 2; i < args.length; i++) {
-                                sb.append(args[i]);
+                                sb.append(args[i] +" ");
                             }
                             if (Integer.parseInt(args[1]) > currentLore.size()) {
                                 for (i = currentLore.size(); i < Integer.parseInt(args[1]) +1; i++) {

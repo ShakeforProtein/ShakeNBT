@@ -1,12 +1,12 @@
 package me.shakeforprotein.shakenbt.Commands;
 
 import me.shakeforprotein.shakenbt.ShakeNBT;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -26,7 +26,7 @@ public class RemoveNBT  implements CommandExecutor {
             Player p = (Player) sender;
             if(p.getInventory().getItemInMainHand() != null && p.getInventory().getItemInMainHand().getType() != Material.AIR) {
                 ItemStack bukkitItem = p.getInventory().getItemInMainHand();
-                net.minecraft.server.v1_15_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
+                net.minecraft.server.v1_16_R1.ItemStack nmsItem = pl.getNMSItem(bukkitItem);
                 NBTTagCompound compound = pl.getCompound(nmsItem);
 
                 if(compound.hasKey(args[0])){
