@@ -1,7 +1,7 @@
 package me.shakeforprotein.shakenbt.Listeners;
 
 import me.shakeforprotein.shakenbt.ShakeNBT;
-import net.minecraft.server.v1_16_R1.MinecraftServer;
+import net.minecraft.server.v1_16_R2.MinecraftServer;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -19,7 +19,7 @@ public class onBlockBreak implements Listener {
     }
 
 
-    @EventHandler
+   /* @EventHandler
     public void witherBreakBlocks(EntityExplodeEvent e) {
         double[] tps = MinecraftServer.getServer().recentTps;
         if (tps[0] < 18) {
@@ -41,6 +41,6 @@ public class onBlockBreak implements Listener {
                 e.getBlock().setType(Material.AIR);
             }
         }
-    }
+    }*/
 
 }
