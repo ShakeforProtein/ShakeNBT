@@ -18,6 +18,8 @@ permissions:
     default: op
   shakenbt.vipplus.loreit:
     default: op
+  shakenbt.setbeacon:
+    default: op
 
 commands:
   nbtshow:

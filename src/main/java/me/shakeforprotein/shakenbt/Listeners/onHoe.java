@@ -13,7 +13,7 @@ public class onHoe implements Listener {
 
     @EventHandler
     public void onPlayerHoe(PlayerInteractEvent e) {
-        if (e.getPlayer().getLocation().getWorld().getName().toLowerCase().contains("hardcore")) {
+        if (!e.getPlayer().getLocation().getWorld().getName().toLowerCase().contains("hardcore")) {
             if (e.getAction() == Action.LEFT_CLICK_BLOCK && e.getItem() != null && e.getItem().getType() == Material.WOODEN_HOE) {
                 e.setCancelled(true);
                 String type = e.getClickedBlock().getType().name().toLowerCase();
@@ -34,7 +34,7 @@ public class onHoe implements Listener {
 
     @EventHandler
     public void onPlayerHoe(PlayerInteractAtEntityEvent e) {
-        if (e.getPlayer().getLocation().getWorld().getName().toLowerCase().contains("hardcore")) {
+        if (!e.getPlayer().getLocation().getWorld().getName().toLowerCase().contains("hardcore")) {
             if (e.getPlayer().getInventory().getItemInMainHand().getType() == Material.WOODEN_HOE && e.getHand() == EquipmentSlot.HAND) {
                 e.setCancelled(true);
                 String type = e.getRightClicked().getType().name().toLowerCase();

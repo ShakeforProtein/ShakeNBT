@@ -1,7 +1,6 @@
 package me.shakeforprotein.shakenbt.Commands;
 
 import me.shakeforprotein.shakenbt.ShakeNBT;
-import net.minecraft.server.v1_16_R2.NBTTagCompound;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

@@ -33,10 +33,14 @@ public class NameIt implements CommandExecutor {
                 theText = ChatColor.translateAlternateColorCodes('&', theText);
 
                 ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
-                ItemMeta meta = item.getItemMeta();
-                meta.setDisplayName(theText);
-                item.setItemMeta(meta);
-                ((Player) sender).getInventory().setItemInMainHand(item);
+                if(item.getType() == Material.VILLAGER_SPAWN_EGG){
+                    sender.sendMessage(pl.badge + "Sorry, you cannot rename villager eggs.");
+                } else {
+                    ItemMeta meta = item.getItemMeta();
+                    meta.setDisplayName(theText);
+                    item.setItemMeta(meta);
+                    ((Player) sender).getInventory().setItemInMainHand(item);
+                }
             }
             else{
                 sender.sendMessage(pl.err + "You require an item in your main hand for this command.");
