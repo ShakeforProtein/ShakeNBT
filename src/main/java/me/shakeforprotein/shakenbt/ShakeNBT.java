@@ -24,7 +24,7 @@ public final class ShakeNBT extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         if(Bukkit.getPluginManager().getPlugin("TreeboRoots") != null && Bukkit.getPluginManager().getPlugin("TreeboRoots").isEnabled()) {
-            roots = (TreeboRoots) Bukkit.getPluginManager().getPlugin("TreeboRoots");
+            roots = ((TreeboRoots) this.getServer().getPluginManager().getPlugin("TreeboRoots")).getInstance();
             roots.updateHandler.registerPlugin(this, "TreeboMC", "ShakeNBT");
             this.getCommand("nbtadd").setExecutor(new AddNBT(this));
             this.getCommand("nbtclear").setExecutor(new ClearNBT(this));
