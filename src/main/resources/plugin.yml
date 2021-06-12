@@ -5,6 +5,7 @@ api-version: 1.15
 authors: [ShakeforProtein]
 description: Tool to read and set nbt tags
 website: http://treebo.games
+depend: [TreeboRoots]
 
 
 permissions:
